@@ -1,58 +1,77 @@
-const productos = [
-    {nombre: "mesa comedor", precio: 8000},
-    {nombre: "mesa ratona", precio: 5000},
-    {nombre: "sillon dos plazas", precio: 4500},
-    {nombre: "sillon una plaza", precio: 2500},
-    {nombre: "smart tv 42", precio: 7500},
-];
-let carrito = []
+const productsContainer = document.getElementById("products-container");
+const IralCarrito = document.getElementById("IralCarrito");
+const modalcontainer = document.getElementById("modalcontainer")
 
-let seleccion = prompt("Desea comprar articulos para su living (si) o (no)") 
+ 
+const productos= [
+    {
+        id: 1, 
+        nombre: "Mesa comedor", 
+        precio: 8000,
+        cantidad: 1,
+    },
+    {
+        id: 2, 
+        nombre: "Mesa ratona", 
+        precio: 5000,
+        cantidad: 1,
+    },
+    {
+        id: 3, 
+        nombre: "Sillon dos plazas", 
+        precio: 4500,
+        cantidad: 1,
+    },
+    {
+        id: 4, 
+        nombre: "Sillon una plaza",  
+        precio: 2500,
+        cantidad: 1,
+    },
+    {
+        id: 5, 
+        nombre: "Smart tv 42", 
+        precio: 7500,
+        cantidad: 1,
+    },
+]
 
-while(seleccion != "si" && seleccion != "no"){
-    alert("respuesta incorrecta")
-    seleccion = prompt("Desea comprar articulos para su living (si) o (no)") 
-}
+let cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
 
-if (seleccion == "si"){
-    let totalproductos = productos.map((productos) => productos.nombre + " " + productos.precio + " pesos ");
-    alert(totalproductos)
-} else if (seleccion == "no"){
-    alert("Haz abandonado la compra")
-}
+productos.forEach((product) => {
+    let content = document.createElement("div");
+    content.className = "card";
+    content.innerHTML = `
+      <h3>${product.nombre}</h3>
+      <p class="precio">${product.precio} </p>
+    `;
 
-while(seleccion != "no"){
-    let producto = prompt("Agrega un articulo")
+    productsContainer.append(content);
 
-    if(producto == "mesa comedor" || "mesa ratona" || "sillon dos plazas" || "sillon una plaza" || "smart tv 42"){
-        switch(producto) {
-            case "mesa comedor":
-            precio = 8000;
-            break
-            case "mesa ratona":
-            precio = 5000;
-            break
-            case "sillon dos plazas":
-            precio = 4500;
-            break
-            case "sillon una plaza":
-            precio = 2500;
-            break
-            case "smart tv 42":
-            precio = 7500;
-            break
-            default:
-            break;
-        }
-    carrito.push({producto, precio}) 
-    } else {
-        alert("producto no existente")
-    }
-    seleccion = prompt("desea agregar algo mas?")
+    let comprar = document.createElement("button");
+    comprar.innerText = "comprar";
+    comprar.className = "comprar";
 
-    while(seleccion === "no"){
-        let totalcarrito = carrito.map((carrito) => " . " + carrito.producgeto + " " + carrito.precio + " pesos ");
-        alert(totalcarrito)
-    break;
-    }
-}
+    content.append(comprar);
+
+    comprar.addEventListener("click", () => {
+       const repeat = cartProducts.some((repeatProduct) => repeatProduct.id === product.id);
+
+        if (repeat === true) {  
+            cartProducts.map((prod) => {
+              if (prod.id === product.id){
+                prod.cantidad++;  
+              }
+            });
+        } else {  
+           cartProducts.push({ 
+            id : product.id,
+            nombre : product.nombre,
+            precio : product.precio,
+            cantidad: product.cantidad,
+           });
+        }     
+        saveLocal();
+    });
+});
+ 
