@@ -63,13 +63,49 @@ function pintarcarrito() {
     totalBuying.innerHTML = `<h3>Total a pagar: ${total} $</h3>`; 
     modalcontainer.append(totalBuying);
     
+    const continuarCompra = document.createElement("button");
+    continuarCompra.className = "finalizar-compra";
+    continuarCompra.innerText = "Continuar a Datos de Facturacion";
+    continuarCompra.addEventListener("click", mostrarModalFacturacion);
+    modalcontainer.append(continuarCompra);
+}
+
+function mostrarModalFacturacion() {
+    modalcontainer.innerHTML = "";
+    const facturacionHeader = document.createElement("div");
+    facturacionHeader.className = "modal-header";
+    facturacionHeader.innerHTML = `<h2 class="modal-header-title">Datos de Facturación</h2>`;
+    modalcontainer.append(facturacionHeader);
+
+    const facturacionContent = document.createElement("div");
+    facturacionContent.className = "facturacion-content"
+    facturacionContent.innerHTML = `
+        <label>Nombre: <input type="text" id="nombre" required></label>
+        <label>Apellido: <input type="text" id="apellido" required></label>
+        <label>Ciudad: <input type="text" id="ciudad" required></label>
+        <label>Domicilio: <input type="text" id="domicilio" required></label>
+    `;
+    modalcontainer.append(facturacionContent);
+
     const finalizarCompra = document.createElement("button");
     finalizarCompra.className = "finalizar-compra";
     finalizarCompra.innerText = "Finalizar Compra";
-    finalizarCompra.addEventListener("click", mostrarResumenCompra);
+    finalizarCompra.addEventListener("click", validarDatosFacturacion);
     modalcontainer.append(finalizarCompra);
 }
 
+function validarDatosFacturacion() {
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const ciudad = document.getElementById("ciudad").value;
+    const domicilio = document.getElementById("domicilio").value;
+
+    if (nombre && apellido && ciudad && domicilio) {
+        mostrarResumenCompra();
+    } else {
+        alert("Por favor, completa todos los campos de facturación.");
+    }
+}
 
 function mostrarResumenCompra() {
     modalcontainer.innerHTML = ""; 
@@ -99,12 +135,15 @@ function mostrarResumenCompra() {
     const cerrarResumen = document.createElement("button");
     cerrarResumen.className = "cerrar-resumen";
     cerrarResumen.innerText = "Cerrar";
+
     cerrarResumen.addEventListener("click", () => {
+        cartProducts = [];
+        localStorage.removeItem("cartProducts");
+        carritoCounter();
         modalcontainer.style.display = "none";
     });
 
     modalcontainer.append(cerrarResumen);
-
     modalcontainer.style.display = "flex"; 
 }
 

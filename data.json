@@ -1,9 +1,9 @@
 [
-    { "id": 1, "nombre": "Mesa comedor", "precio": 8000, "cantidad": 1 },
-    { "id": 2, "nombre": "Mesa ratona", "precio": 5000, "cantidad": 1 },
-    { "id": 3, "nombre": "Sillon dos plazas", "precio": 4500, "cantidad": 1 },
-    { "id": 4, "nombre": "Sillon una plaza", "precio": 2500, "cantidad": 1 },
-    { "id": 5, "nombre": "Smart tv 42", "precio": 7500, "cantidad": 1 },
-    { "id": 6, "nombre": "Lampara de piso", "precio": 3000, "cantidad": 1 },
-    { "id": 7, "nombre": "Cuadro decorativo", "precio": 1500, "cantidad": 1 }
+    { "id": 1, "nombre": "Mesa comedor", "precio": 8000, "imagen": "assets/mesa comedor.webp", "cantidad": 1 },
+    { "id": 2, "nombre": "Mesa ratona", "precio": 5000,"imagen": "assets/mesa ratona blanca.webp", "cantidad": 1 },
+    { "id": 3, "nombre": "Sillon dos plazas", "precio": 4500,"imagen": "assets/sillon de dos plazas.webp", "cantidad": 1 },
+    { "id": 4, "nombre": "Sillon una plaza", "precio": 2500,"imagen": "assets/sillon de una plaza.webp", "cantidad": 1 },
+    { "id": 5, "nombre": "Smart tv 42", "precio": 7500,"imagen": "assets/Tv 42 pulgadas.webp", "cantidad": 1 },
+    { "id": 6, "nombre": "Lampara de piso", "precio": 3000,"imagen": "assets/lampara de piso.webp", "cantidad": 1 },
+    { "id": 7, "nombre": "Cuadro decorativo", "precio": 1500,"imagen": "assets/Cuadro decorativo.webp", "cantidad": 1 }
 ]
